@@ -1,9 +1,11 @@
 package io.doubleu0714.handson.kopring.repository.entity
 
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 
 @Entity
 data class Mentor(
@@ -11,4 +13,6 @@ data class Mentor(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
     val name: String,
+    @OneToMany(mappedBy = "mentor", cascade = [CascadeType.PERSIST, CascadeType.MERGE])
+    val classes: MutableList<Class>,
 )

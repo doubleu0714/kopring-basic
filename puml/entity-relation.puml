@@ -1,0 +1,17 @@
+@startuml
+class "Class" as c {
+  +id: Long?
+  +name: String
+}
+class "Mentor" as mr {
+  +id: Long?
+  +name: String
+}
+class "Mentee" as mt {
+  +id: Long?
+  +name: String
+}
+
+mr "1" --{ "1..*" c
+c "1" -right-{ "0..*" mt : "\t\t"
+@enduml
