@@ -1,0 +1,27 @@
+plugins {
+    kotlin("jvm") version "2.1.20"
+    id("org.springframework.boot") version "3.4.4"
+    id("io.spring.dependency-management") version "1.1.7"
+    kotlin("plugin.spring") version "2.1.20"
+}
+
+group = "io.doubleu0714.handson.kopring"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    testImplementation(kotlin("test"))
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.0")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(21)
+}
