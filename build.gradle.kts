@@ -21,6 +21,8 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.mockk:mockk-jvm:1.14.0")
+    testImplementation("com.navercorp.fixturemonkey:fixture-monkey-kotlin:1.1.11")
 }
 
 tasks.test {
