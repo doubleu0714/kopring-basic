@@ -3,6 +3,9 @@ class "Class" as c {
   +id: Long?
   +name: String
 }
+class "ClassRoom" as cr {
+  +id: Long?
+}
 class "Mentor" as mr {
   +id: Long?
   +name: String
@@ -13,5 +16,6 @@ class "Mentee" as mt {
 }
 
 mr "1" --{ "1..*" c
-c "1" -right-{ "0..*" mt : "\t\t"
+c "1" -right-{ "0..*" cr : "\t\t"
+mt "1" -left-{ "0..*" cr : "\t\t"
 @enduml

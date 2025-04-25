@@ -1,6 +1,7 @@
 package io.doubleu0714.handson.kopring.repository.entity
 
 import jakarta.persistence.Entity
+import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
@@ -9,17 +10,26 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 
 @Entity
-class Class(
+class Class private constructor(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val name: String,
-    @ManyToOne
+    name: String,
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentor_id")
     val mentor: Mentor,
-    @OneToMany(mappedBy = "cls")
-    val mentees: MutableList<Mentee>,
+    @OneToMany(mappedBy = "cls", fetch = FetchType.LAZY)
+    val classRooms: MutableList<ClassRoom>,
 ) {
+    var name: String = name
+        private set
+
+    fun modify(command: ModifyCommand) {
+        this.name = command.name
+    }
+
+    data class ModifyCommand(val name: String)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Class) return false
@@ -34,7 +44,14 @@ class Class(
     }
 
     override fun toString(): String {
-        return "Class(id=$id, name='$name', mentor.id=${mentor.id}, mentees=$mentees)"
+        return "Class(id=$id, name='$name', mentor.id=${mentor.id} )"
     }
 
+    companion object {
+        operator fun invoke(name: String, mentor: Mentor): Class = Class(
+            name = name,
+            mentor = mentor,
+            classRooms = mutableListOf(),
+        )
+    }
 }

@@ -5,20 +5,24 @@ import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.OneToMany
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.ManyToOne
 
 @Entity
-class Mentee(
+class ClassRoom (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val name: String,
-    @OneToMany(mappedBy = "mentee", fetch = FetchType.LAZY)
-    val classRooms: MutableList<ClassRoom>,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_id")
+    val cls: Class,
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentee_id")
+    val mentee: Mentee,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is Mentee) return false
+        if (other !is ClassRoom) return false
 
         if (id != other.id) return false
 
@@ -27,9 +31,5 @@ class Mentee(
 
     override fun hashCode(): Int {
         return id?.hashCode() ?: 0
-    }
-
-    override fun toString(): String {
-        return "Mentee(id=$id, name='$name')"
     }
 }
