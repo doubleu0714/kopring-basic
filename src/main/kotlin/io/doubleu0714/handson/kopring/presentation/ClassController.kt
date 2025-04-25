@@ -14,6 +14,16 @@ class ClassController(
     @PostMapping
     fun createClass(@RequestBody request: CreateClassRequest): CreateClassResponse =
         classService.createClass(request = request)
+
+    @PostMapping("/requiresNew")
+    fun requiresNewTest() {
+        classService.requiresNewTest()
+    }
+
+    @PostMapping("/requiresNew2")
+    fun requiresNewTest2() {
+        classService.requiresNewTest2()
+    }
 }
 
 data class CreateClassRequest(

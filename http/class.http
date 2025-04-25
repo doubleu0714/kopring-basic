@@ -17,3 +17,12 @@ Content-Type: application/json
 
 ### 수업 취소
 DELETE {{host}}/api/v1/classrooms/1/mentees/1
+
+### Required new test
+POST {{host}}/api/v1/classes/requiresNew
+Content-Type: application/json
+
+
+### Required new test
+POST {{host}}/api/v1/classes/requiresNew2
+Content-Type: application/json

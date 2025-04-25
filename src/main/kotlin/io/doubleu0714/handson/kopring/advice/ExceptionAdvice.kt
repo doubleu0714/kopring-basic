@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class ExceptionAdvice {
     @ExceptionHandler(IllegalArgumentException::class, IllegalStateException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun handleIllegalArgumentException(exception: IllegalArgumentException): CommonErrorResponse =
+    fun handleIllegalArgumentException(exception: Throwable): CommonErrorResponse =
         CommonErrorResponse(
             code = "BAD_REQUEST",
             message = exception.message ?: "Bad Request"
