@@ -24,12 +24,6 @@ class Class private constructor(
     var name: String = name
         private set
 
-    fun modify(command: ModifyCommand) {
-        this.name = command.name
-    }
-
-    data class ModifyCommand(val name: String)
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Class) return false

@@ -9,7 +9,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 
 @Entity
-class ClassRoom (
+class ClassRoom private constructor(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
@@ -31,5 +31,12 @@ class ClassRoom (
 
     override fun hashCode(): Int {
         return id?.hashCode() ?: 0
+    }
+
+    companion object {
+        operator fun invoke(cls: Class, mentee: Mentee): ClassRoom = ClassRoom(
+            cls = cls,
+            mentee = mentee,
+        )
     }
 }

@@ -37,25 +37,6 @@ class Mentor private constructor(
         return id?.hashCode() ?: 0
     }
 
-    fun add(command: CreateClassCommand) {
-        classes.add(
-            Class(
-                name = command.name,
-                mentor = this,
-            )
-        )
-    }
-
-    fun modify(command: ModifyCommand) {
-        this.name = command.name
-    }
-
-    data class ModifyClassCommand(val classId: Long, val name: String)
-
-    data class ModifyCommand(val name: String)
-
-    data class CreateClassCommand(val name: String)
-
     companion object {
         operator fun invoke(name: String): Mentor = Mentor(
             name = name,
