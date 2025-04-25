@@ -1,0 +1,19 @@
+POST {{host}}/api/v1/classes
+Content-Type: application/json
+
+{
+  "mentor_id": 1,
+  "name": "my-class"
+}
+
+### 수업 등록
+POST {{host}}/api/v1/classrooms
+Content-Type: application/json
+
+{
+  "class_id": 1,
+  "mentee_id": 1
+}
+
+### 수업 취소
+DELETE {{host}}/api/v1/classrooms/1/mentees/1
